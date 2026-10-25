@@ -1,6 +1,8 @@
 // Pocket 400 offline support. The page is fetched fresh when online (so updates
 // arrive on the next open) and served from the cache when offline.
-const CACHE = 'pocket400-ae68b78a12';
+// each app on this origin keeps its own cache, named by prefix
+const PREFIX = 'pocket400:';
+const CACHE = PREFIX + 'ae68b78a12';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon.svg'];
 
 self.addEventListener('install', e => {
@@ -9,7 +11,7 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys()
-    .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+    .then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== CACHE).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 
