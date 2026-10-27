@@ -2,7 +2,7 @@
 // arrive on the next open) and served from the cache when offline.
 // each app on this origin keeps its own cache, named by prefix
 const PREFIX = 'pocket400:';
-const CACHE = PREFIX + '02a9b7816c';
+const CACHE = PREFIX + 'c983195660';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon.svg'];
 
 self.addEventListener('install', e => {
